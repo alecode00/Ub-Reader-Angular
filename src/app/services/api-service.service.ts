@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book } from '../models/book.model';
+import { Book, BooksList } from '../models/book.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiServiceService {
-  private baseURL = 'https://freetestapi.com/api/v1/books';
-  //private _apiClient: HttpClient = Inject(HttpClient);
-  constructor(private _httpClient: HttpClient) {}
+  private baseURL = 'https://api.itbook.store/1.0/';
+  private _httpClient = inject(HttpClient);
+  /* constructor(private _httpClient: HttpClient) {} */
 
-  public getBooks(): Observable<Book[]> {
-    return this._httpClient.get<Book[]>(`${this.baseURL}`);
+  public getBooks(): Observable<BooksList> {
+    return this._httpClient.get<BooksList>(`${this.baseURL}/search/mongodb`);
   }
 }

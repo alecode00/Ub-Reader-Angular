@@ -1,0 +1,58 @@
+<section id="enableBooksSection">
+  <article>
+    <header className="headerContainer">
+      <h1 className="headerContainerItems" id="giantText">
+        <!-- {availableBooksCounter} -->
+        libros disponibles
+      </h1>
+      <p className="headerContainerItems">
+        <!-- {readingListCounter} -->
+        en la lista de lectura
+      </p>
+      <p className="headerContainerItems">
+        <!--  {availableBooksForGenreCounter} -->
+        libros disponibles del género
+      </p>
+      <div className="headerContainerItems" id="inputGenre">
+        <datalist id="genre">
+          <option value="Fantasía"></option>
+          <option value="Ciencia ficción"></option>
+          <option value="Zombies"></option>
+          <option value="Terror"></option>
+        </datalist>
+        <label for="genre">Género: </label>
+        <input
+          type="text"
+          name="genre"
+          id="genre"
+          list="genre"
+          value="{genre}"
+          onChange="{handleSetGenre}"
+        />
+      </div>
+      <!-- {/*
+      <h2>Lista de Libros Disponibles</h2>
+      className={ book.added ? "availableBooksImageAdded" :  "availableBooksImageUnAdded" }
+      */} -->
+    </header>
+
+    <ul id="enableBooksList">
+      <!-- {/* Renderizado de los libros según el género seleccionado. */} -->
+      <!-- {books.map((book) => { if (!genre) { return ( -->
+      @for (book of booksList.books; track book.isbn13) {
+      <li class="availableListElement">
+        <img
+          [ngClass]="
+            book.isAdded
+              ? 'availableBooksImageAdded'
+              : 'availableBooksImageUnAdded'
+          "
+          src="{{ book.image }}"
+          alt="{book.title}"
+          (click)="handleBookClick(book.isbn13)"
+        />
+      </li>
+      }
+    </ul>
+  </article>
+</section>

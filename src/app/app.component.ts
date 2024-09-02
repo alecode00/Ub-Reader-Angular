@@ -1,23 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Book } from './models/book.model';
-import { ApiServiceService } from './services/api-service.service';
+import { AvailableBooksListComponent } from './available-books-list/available-books-list.component';
+import { ReadingListComponent } from './reading-list/reading-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AvailableBooksListComponent, ReadingListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
-  booksList: Book[] = [];
-  constructor(private _apiService: ApiServiceService) {}
-
+export class AppComponent {
   title = 'Ub-Reader-Angular';
-  ngOnInit(): void {
-    this._apiService.getBooks().subscribe((data) => {
-      this.booksList = data;
-    });
-  }
 }

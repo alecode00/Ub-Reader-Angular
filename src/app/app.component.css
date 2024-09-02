@@ -1,0 +1,23 @@
+main {
+  display: flex;
+  margin: 5vh 2.5vh 0 5vh;
+  justify-content: space-between;
+  font-family: "Papyrus";
+}
+
+img {
+  transform: scale(1);
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.5);
+  filter: brightness(1.2);
+  transition: transform 0.3s;
+}
+img:hover {
+  transform: scale(1.1);
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.8);
+}
+@media screen and (max-width: 635px) {
+  .appContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

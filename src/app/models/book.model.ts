@@ -1,10 +1,16 @@
+export interface BooksList {
+  error: string;
+  total: string;
+  page?: string;
+  books: Book[];
+}
+
 export interface Book {
-    id:               number;
-    title:            string;
-    author:           string;
-    publication_year: number | string;
-    genre:            string[];
-    description:      string;
-    cover_image:      string;
-    isAdded?:         boolean;
+  title: string;
+  subtitle: string;
+  isbn13: string;
+  price: string;
+  image: string;
+  url: string;
+  isAdded?: boolean;
 }
