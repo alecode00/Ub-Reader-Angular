@@ -39,7 +39,7 @@
     <ul id="enableBooksList">
       <!-- {/* Renderizado de los libros según el género seleccionado. */} -->
       <!-- {books.map((book) => { if (!genre) { return ( -->
-      @for (book of booksList.books; track book.isbn13) {
+      @for (book of booksList; track book.isbn13) {
       <li class="availableListElement">
         <img
           [ngClass]="
@@ -49,7 +49,7 @@
           "
           src="{{ book.image }}"
           alt="{book.title}"
-          (click)="handleBookClick(book.isbn13)"
+          (click)="fakeHandleBookClick(book.isbn13)"
         />
       </li>
       }

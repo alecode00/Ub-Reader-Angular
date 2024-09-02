@@ -1,0 +1,21 @@
+<p>text works!</p>
+<h1>{{ count() }}</h1>
+<h2>Lista de libros Disponible</h2>
+<ul>
+  @for (book of bookList(); track book.isbn13 ) { @if (!book.isAdded) {
+  <li>
+    {{ book.title }}
+  </li>
+  } }
+</ul>
+<h2>Lista de libros Añadidos</h2>
+<ul>
+  @for (book of bookList(); track book.isbn13 ) { @if (book.isAdded) {
+  <li>
+    {{ book.title }}
+  </li>
+  } }
+</ul>
+<button type="button" (click)="conseguirArreglo()">Buscar arrays</button>
+<button type="button" (click)="cambiarArreglo()">Vaciar array</button>
+<button type="button" (click)="aumentar()">Aumentar contador</button>
