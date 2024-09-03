@@ -16,12 +16,8 @@ export class ReadingListComponent {
   handleUncheckBook(bookId: string) {
     const newBooks = this.booksList().map((book) => {
       if (book.isbn13 === bookId) {
-        //Al hacer click en un libro se disminuye el contador de libros disponibles
         this._libraryService.increaseAvailableBooksCounter();
-        //Al hacer click en un libro se aumenta el contador de libros en la lista de lectura
         this._libraryService.decreaseReadingListCounter();
-        this._libraryService.increaseAvailableBooksForGenreCounter();
-        console.log('Se actualizó un libro');
         return {
           ...book,
           isAdded: false,
@@ -33,6 +29,5 @@ export class ReadingListComponent {
       }
     });
     this._libraryService.setBooks(newBooks);
-    console.log('Se actualizó librería');
   }
 }

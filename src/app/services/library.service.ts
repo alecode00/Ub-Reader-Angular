@@ -27,7 +27,6 @@ export class LibraryService {
             book.genre = 'Angular';
           }
         }
-        console.log(data.books);
         this.booksList.set(data.books);
         this.availableBooksCounter.set(data.books.length);
         this.availableBooksForGenreCounter.set(data.books.length);
@@ -43,7 +42,6 @@ export class LibraryService {
     this.booksList.set(newBooks);
   }
 
-
   availableBooksCounter = signal<number>(0);
   increaseAvailableBooksCounter() {
     this.availableBooksCounter.update((value) => value + 1);
@@ -52,7 +50,6 @@ export class LibraryService {
     this.availableBooksCounter.update((value) => value - 1);
   }
 
-
   readingListCounter = signal<number>(0);
   increaseReadingListCounter() {
     this.readingListCounter.update((value) => value + 1);
@@ -60,7 +57,6 @@ export class LibraryService {
   decreaseReadingListCounter() {
     this.readingListCounter.update((value) => value - 1);
   }
-
 
   availableBooksForGenreCounter = signal<number>(0);
   increaseAvailableBooksForGenreCounter() {
@@ -73,7 +69,6 @@ export class LibraryService {
     this.availableBooksForGenreCounter.set(0);
   }
 
-  
   genre = signal<string>('No Seleccionado');
   public setGenre(newGenre: string) {
     this.genre.set(newGenre);

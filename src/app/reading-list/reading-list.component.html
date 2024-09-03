@@ -5,7 +5,7 @@
     </header>
     <ul id="readingBooksList">
       @for (book of booksList(); track book.isbn13) { @if ( book.isAdded ) {
-      <li  class="readingListElement">
+      <li class="readingListElement">
         <img
           class="readingBooksImage"
           src="{{ book.image }}"
