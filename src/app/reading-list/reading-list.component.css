@@ -9,10 +9,10 @@
 header {
   text-align: center;
 }
-.readingBooksImage {
+/* .readingBooksImage {
   width: 10vw;
   height: 20vh;
-}
+} */
 #readingBooksSection::-webkit-scrollbar {
   display: none;
 }

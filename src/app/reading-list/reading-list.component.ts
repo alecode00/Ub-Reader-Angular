@@ -17,9 +17,10 @@ export class ReadingListComponent {
     const newBooks = this.booksList().map((book) => {
       if (book.isbn13 === bookId) {
         //Al hacer click en un libro se disminuye el contador de libros disponibles
-        /*  handleSetAvailableBooksCounter(availableBooksCounter - 1); */
+        this._libraryService.increaseAvailableBooksCounter();
         //Al hacer click en un libro se aumenta el contador de libros en la lista de lectura
-        /* handleSetReadingListCounter(readingListCounter + 1); */
+        this._libraryService.decreaseReadingListCounter();
+        this._libraryService.increaseAvailableBooksForGenreCounter();
         console.log('Se actualizó un libro');
         return {
           ...book,

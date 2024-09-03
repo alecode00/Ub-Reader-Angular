@@ -1,4 +1,4 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, OnInit, runInInjectionContext, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { LibraryService } from '../services/library.service';
 import { Book, BooksList } from '../models/book.model';
@@ -13,7 +13,12 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './available-books-list.component.css',
 })
 export class AvailableBooksListComponent implements OnInit {
-  constructor(private _libraryService: LibraryService) {}
+  constructor(private _libraryService: LibraryService) {
+    this.changeEffect = effect(() => {
+      console.log('El nuevo genre es: ', this.genre);
+    }
+  )
+  }
 
   booksList = computed(() => this._libraryService.booksList());
 
@@ -23,8 +28,37 @@ export class AvailableBooksListComponent implements OnInit {
 
   genre: string = 'No Seleccionado';
   onGenreChange() {
-    console.log('Nuevo género seleccionado: ', this.genre);
+    
+
+    this._libraryService.restartAvailableBooksForGenreCounter();
+
+    if (this.genre === 'No Seleccionado') {
+      for (const book of this.booksList()) {
+        if (!book.isAdded) {
+          this._libraryService.increaseAvailableBooksForGenreCounter();
+        }
+      }
+    } else {
+      for (const book of this.booksList()) {
+        if (book.genre === this.genre && !book.isAdded) {
+          this._libraryService.increaseAvailableBooksForGenreCounter();
+        }
+      }
+    }
   }
+
+  changeEffect: any;
+
+  availableBooksCounter = computed(() =>
+    this._libraryService.availableBooksCounter()
+  );
+
+  readingListCounter = computed(() =>
+    this._libraryService.readingListCounter()
+  );
+  availableBooksForGenreCounter = computed(() =>
+    this._libraryService.availableBooksForGenreCounter()
+  );
 
   handleBookClick(bookId: string) {
     console.log(
@@ -38,9 +72,10 @@ export class AvailableBooksListComponent implements OnInit {
       const newBooks = this.booksList().map((book) => {
         if (book.isbn13 === bookId) {
           //Al hacer click en un libro se disminuye el contador de libros disponibles
-          /*  handleSetAvailableBooksCounter(availableBooksCounter - 1); */
+          this._libraryService.decreaseAvailableBooksCounter();
           //Al hacer click en un libro se aumenta el contador de libros en la lista de lectura
-          /* handleSetReadingListCounter(readingListCounter + 1); */
+          this._libraryService.increaseReadingListCounter();
+          this._libraryService.decreaseAvailableBooksForGenreCounter();
           console.log('Se actualizó un libro');
           return {
             ...book,

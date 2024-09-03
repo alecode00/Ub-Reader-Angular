@@ -41,14 +41,14 @@ select {
   padding-top: 4%;
 }
 .availableBooksImageAdded {
-  width: 10vw;
-  height: 20vh;
+  /* width: 10vw;
+  height: 20vh; */
   opacity: 0.3;
 }
-.availableBooksImageUnAdded {
+/* .availableBooksImageUnAdded {
   width: 10vw;
   height: 20vh;
-}
+} */
 @media screen and (max-width: 635px) {
   #enableBooksSection {
     width: 80vw;
@@ -56,14 +56,14 @@ select {
   select {
     width: 35vw;
   }
-  .availableBooksImageAdded {
+  /* .availableBooksImageAdded {
     width: 15vw;
     height: 15vh;
   }
   .availableBooksImageUnAdded {
     width: 15vw;
     height: 15vh;
-  }
+  } */
 }
 @media screen and (max-width: 400px) {
   select {

@@ -2,32 +2,31 @@
   <article>
     <header class="headerContainer">
       <h1 class="headerContainerItems" id="giantText">
-        <!-- {availableBooksCounter} -->
+        {{availableBooksCounter()}}
         libros disponibles
       </h1>
       <p class="headerContainerItems">
-        <!-- {readingListCounter} -->
+        {{readingListCounter()}}
         en la lista de lectura
       </p>
       <p class="headerContainerItems">
-        <!--  {availableBooksForGenreCounter} -->
+        {{availableBooksForGenreCounter()}}
         libros disponibles del género
       </p>
       <div class="headerContainerItems" id="inputGenre">
         <label for="genre">Género: </label>
         <select id="genre" [(ngModel)]="genre" (ngModelChange)="onGenreChange()">
           <option value="No Seleccionado">No Seleccionado</option>
-          <option value="Fantasía">Fantasía</option>
-          <option value="Ciencia Ficción">Ciencia ficción</option>
-          <option value="Zombies">Zombies</option>
-          <option value="Terror">Terror</option>
+          <option value="Base de Datos">Base de Datos</option>
+          <option value="Node Js">Node Js</option>
+          <option value="Python">Python</option>
+          <option value="Angular">Angular</option>
         </select>
       </div>
     </header>
 
     <ul id="enableBooksList">
       <!-- {/* Renderizado de los libros según el género seleccionado. */} -->
-      <!-- {books.map((book) => { if (!genre) { return ( -->
       @for (book of booksList(); track book.isbn13) {
         @if (genre=='No Seleccionado') {
           <li class="availableListElement">
