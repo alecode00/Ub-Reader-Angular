@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { BooksList } from '../models/book.model';
 import { ApiServiceService } from '../services/api-service.service';
 import { LibraryService } from '../services/library.service';
@@ -10,27 +10,30 @@ import { LibraryService } from '../services/library.service';
   templateUrl: './reading-list.component.html',
   styleUrl: './reading-list.component.css',
 })
-export class ReadingListComponent implements OnInit {
-  booksList: BooksList = {
-    error: '0',
-    total: '0',
-    books: [],
-  };
-  constructor(
-    private _libraryService: LibraryService,
-    private _apiService: ApiServiceService
-  ) {}
+export class ReadingListComponent {
+  booksList = computed(() => this._libraryService.booksList());
+
+  constructor(private _libraryService: LibraryService) {}
 
   handleUncheckBook(bookId: string) {
-    console.log('Hola');
-  }
-
-  ngOnInit(): void {
-    this._apiService.getBooks().subscribe((data) => {
-      for (const book of data.books) {
-        book.isAdded = false;
+    const newBooks = this.booksList().map((book) => {
+      if (book.isbn13 === bookId) {
+        //Al hacer click en un libro se disminuye el contador de libros disponibles
+        /*  handleSetAvailableBooksCounter(availableBooksCounter - 1); */
+        //Al hacer click en un libro se aumenta el contador de libros en la lista de lectura
+        /* handleSetReadingListCounter(readingListCounter + 1); */
+        console.log('Se actualizó un libro');
+        return {
+          ...book,
+          isAdded: false,
+        };
+      } else {
+        return {
+          ...book,
+        };
       }
-      this.booksList = data;
     });
+    this._libraryService.setBooks(newBooks);
+    console.log('Se actualizó librería');
   }
 }

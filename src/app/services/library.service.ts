@@ -10,8 +10,20 @@ export class LibraryService {
     this._httpClient
       .get<BooksList>(`${this.baseURL}/search/mongodb`)
       .subscribe((data) => {
-        for (const book of data.books) {
+        for (const [index, book] of data.books.entries()) {
           book.isAdded = false;
+          if (index == 0 || index == 1 || index == 8) {
+            book.genre = 'Fantasía';
+          }
+          if (index == 2 || index == 3) {
+            book.genre = 'Ciencia Ficción';
+          }
+          if (index == 4 || index == 5 || index == 9) {
+            book.genre = 'Terror';
+          }
+          if (index == 6 || index == 7) {
+            book.genre = 'Zombie';
+          }
         }
         console.log(data.books);
         this.booksList.set(data.books);

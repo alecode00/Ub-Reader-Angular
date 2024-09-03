@@ -13,4 +13,5 @@ export interface Book {
   image: string;
   url: string;
   isAdded?: boolean;
+  genre?: string;
 }

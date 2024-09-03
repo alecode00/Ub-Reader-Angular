@@ -1,14 +1,17 @@
-.readingBooksImage {
-  width: 10vw;
-  height: 20vh;
-}
 #readingBooksSection {
   background-color: rgb(43, 53, 61);
   border-radius: 5%;
   width: 30vw;
-  height: 90vh;
+  height: 70vh;
   overflow-y: scroll;
   border: gray 4px ridge;
+}
+header {
+  text-align: center;
+}
+.readingBooksImage {
+  width: 10vw;
+  height: 20vh;
 }
 #readingBooksSection::-webkit-scrollbar {
   display: none;
@@ -21,9 +24,6 @@
   flex-wrap: wrap;
   list-style: none;
 }
-header {
-  text-align: center;
-}
 .readingListElement {
   display: flex;
   width: 50%;
@@ -33,7 +33,7 @@ header {
 }
 @media screen and (max-width: 635px) {
   #readingBooksSection {
-    width: 80vw;
+    width: 60vw;
   }
   .readingBooksImage {
     width: 15vw;

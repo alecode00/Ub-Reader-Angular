@@ -4,10 +4,10 @@
       <h2>Lista de Lectura</h2>
     </header>
     <ul id="readingBooksList">
-      @for (book of booksList.books; track book.isbn13) { @if ( book.isAdded ) {
-      <li key="{book.id}" className="readingListElement">
+      @for (book of booksList(); track book.isbn13) { @if ( book.isAdded ) {
+      <li  class="readingListElement">
         <img
-          className="readingBooksImage"
+          class="readingBooksImage"
           src="{{ book.image }}"
           alt="{{ book.title }}"
           (click)="handleUncheckBook(book.isbn13)"

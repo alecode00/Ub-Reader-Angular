@@ -1,45 +1,41 @@
 <section id="enableBooksSection">
   <article>
-    <header className="headerContainer">
-      <h1 className="headerContainerItems" id="giantText">
+    <header class="headerContainer">
+      <h1 class="headerContainerItems" id="giantText">
         <!-- {availableBooksCounter} -->
         libros disponibles
       </h1>
-      <p className="headerContainerItems">
+      <p class="headerContainerItems">
         <!-- {readingListCounter} -->
         en la lista de lectura
       </p>
-      <p className="headerContainerItems">
+      <p class="headerContainerItems">
         <!--  {availableBooksForGenreCounter} -->
         libros disponibles del género
       </p>
-      <div className="headerContainerItems" id="inputGenre">
-        <datalist id="genre">
-          <option value="Fantasía"></option>
-          <option value="Ciencia ficción"></option>
-          <option value="Zombies"></option>
-          <option value="Terror"></option>
-        </datalist>
+      <div class="headerContainerItems" id="inputGenre">
         <label for="genre">Género: </label>
-        <input
+        <select id="genre">
+          <option value="No Seleccionado">No Seleccionado</option>
+          <option value="Fantasía">Fantasía</option>
+          <option value="Ciencia ficción">Ciencia ficción</option>
+          <option value="Zombies">Zombies</option>
+          <option value="Terror">Terror</option>
+        </select>
+        <!-- <input
           type="text"
           name="genre"
           id="genre"
-          list="genre"
           value="{genre}"
           onChange="{handleSetGenre}"
-        />
+        /> -->
       </div>
-      <!-- {/*
-      <h2>Lista de Libros Disponibles</h2>
-      className={ book.added ? "availableBooksImageAdded" :  "availableBooksImageUnAdded" }
-      */} -->
     </header>
 
     <ul id="enableBooksList">
       <!-- {/* Renderizado de los libros según el género seleccionado. */} -->
       <!-- {books.map((book) => { if (!genre) { return ( -->
-      @for (book of booksList; track book.isbn13) {
+      @for (book of booksList(); track book.isbn13) {
       <li class="availableListElement">
         <img
           [ngClass]="
@@ -48,8 +44,8 @@
               : 'availableBooksImageUnAdded'
           "
           src="{{ book.image }}"
-          alt="{book.title}"
-          (click)="fakeHandleBookClick(book.isbn13)"
+          alt="{{ book.title }}"
+          (click)="handleBookClick(book.isbn13)"
         />
       </li>
       }
