@@ -3,11 +3,12 @@ import { NgClass } from '@angular/common';
 import { LibraryService } from '../services/library.service';
 import { Book, BooksList } from '../models/book.model';
 import { ApiServiceService } from '../services/api-service.service';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-available-books-list',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, FormsModule],
   templateUrl: './available-books-list.component.html',
   styleUrl: './available-books-list.component.css',
 })
@@ -19,8 +20,14 @@ export class AvailableBooksListComponent implements OnInit {
   ngOnInit(): void {
     console.log(this._libraryService.booksList());
   }
+
+  genre: string = 'No Seleccionado';
+  onGenreChange() {
+    console.log('Nuevo género seleccionado: ', this.genre);
+  }
+
   handleBookClick(bookId: string) {
-  console.log(
+    console.log(
       this.booksList().find((book) => book.isbn13 === bookId)?.isAdded
     );
     console.log(this.booksList().find((book) => book.isbn13 === bookId));
@@ -30,11 +37,11 @@ export class AvailableBooksListComponent implements OnInit {
     } else {
       const newBooks = this.booksList().map((book) => {
         if (book.isbn13 === bookId) {
-  //Al hacer click en un libro se disminuye el contador de libros disponibles
-  /*  handleSetAvailableBooksCounter(availableBooksCounter - 1); */
-  //Al hacer click en un libro se aumenta el contador de libros en la lista de lectura
-  /* handleSetReadingListCounter(readingListCounter + 1); */
-  console.log('Se actualizó un libro');
+          //Al hacer click en un libro se disminuye el contador de libros disponibles
+          /*  handleSetAvailableBooksCounter(availableBooksCounter - 1); */
+          //Al hacer click en un libro se aumenta el contador de libros en la lista de lectura
+          /* handleSetReadingListCounter(readingListCounter + 1); */
+          console.log('Se actualizó un libro');
           return {
             ...book,
             isAdded: true,
@@ -50,5 +57,3 @@ export class AvailableBooksListComponent implements OnInit {
     }
   }
 }
-
-

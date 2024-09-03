@@ -24,7 +24,7 @@ main {
   display: flex;
   margin: 5vh 2.5vh 0 5vh;
   justify-content: space-between;
-  font-family: "Papyrus";
+  font-family:cursive;
 }
 
 @media screen and (max-width: 635px) {

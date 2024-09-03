@@ -22,7 +22,7 @@ export class LibraryService {
             book.genre = 'Terror';
           }
           if (index == 6 || index == 7) {
-            book.genre = 'Zombie';
+            book.genre = 'Zombies';
           }
         }
         console.log(data.books);

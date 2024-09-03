@@ -1,6 +1,4 @@
-import { Component, computed, OnInit } from '@angular/core';
-import { BooksList } from '../models/book.model';
-import { ApiServiceService } from '../services/api-service.service';
+import { Component, computed } from '@angular/core';
 import { LibraryService } from '../services/library.service';
 
 @Component({

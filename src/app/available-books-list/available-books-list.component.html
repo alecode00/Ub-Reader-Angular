@@ -15,20 +15,13 @@
       </p>
       <div class="headerContainerItems" id="inputGenre">
         <label for="genre">Género: </label>
-        <select id="genre">
+        <select id="genre" [(ngModel)]="genre" (ngModelChange)="onGenreChange()">
           <option value="No Seleccionado">No Seleccionado</option>
           <option value="Fantasía">Fantasía</option>
-          <option value="Ciencia ficción">Ciencia ficción</option>
+          <option value="Ciencia Ficción">Ciencia ficción</option>
           <option value="Zombies">Zombies</option>
           <option value="Terror">Terror</option>
         </select>
-        <!-- <input
-          type="text"
-          name="genre"
-          id="genre"
-          value="{genre}"
-          onChange="{handleSetGenre}"
-        /> -->
       </div>
     </header>
 
@@ -36,18 +29,34 @@
       <!-- {/* Renderizado de los libros según el género seleccionado. */} -->
       <!-- {books.map((book) => { if (!genre) { return ( -->
       @for (book of booksList(); track book.isbn13) {
-      <li class="availableListElement">
-        <img
-          [ngClass]="
-            book.isAdded
-              ? 'availableBooksImageAdded'
-              : 'availableBooksImageUnAdded'
-          "
-          src="{{ book.image }}"
-          alt="{{ book.title }}"
-          (click)="handleBookClick(book.isbn13)"
-        />
-      </li>
+        @if (genre=='No Seleccionado') {
+          <li class="availableListElement">
+            <img
+              [ngClass]="
+                book.isAdded
+                  ? 'availableBooksImageAdded'
+                  : 'availableBooksImageUnAdded'
+              "
+              src="{{ book.image }}"
+              alt="{{ book.title }}"
+              (click)="handleBookClick(book.isbn13)"
+            />
+          </li>
+        }@else if (book.genre == genre) {
+            <li class="availableListElement">
+              <img
+                [ngClass]="
+                  book.isAdded
+                    ? 'availableBooksImageAdded'
+                    : 'availableBooksImageUnAdded'
+                "
+                src="{{ book.image }}"
+                alt="{{ book.title }}"
+                (click)="handleBookClick(book.isbn13)"
+              />
+            </li>
+          }
+        
       }
     </ul>
   </article>
