@@ -1,9 +1,7 @@
-import { Component, computed, effect, OnInit, runInInjectionContext, signal } from '@angular/core';
+import { Component, computed, effect, OnInit, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { LibraryService } from '../services/library.service';
-import { Book, BooksList } from '../models/book.model';
-import { ApiServiceService } from '../services/api-service.service';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-available-books-list',
@@ -14,40 +12,42 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class AvailableBooksListComponent implements OnInit {
   constructor(private _libraryService: LibraryService) {
-    this.changeEffect = effect(() => {
-      console.log('El nuevo genre es: ', this.genre);
-    }
-  )
-  }
+    effect(
+      () => {
+        console.log('El nuevo genre es: ', this.genre());
+        this._libraryService.restartAvailableBooksForGenreCounter();
 
-  booksList = computed(() => this._libraryService.booksList());
+        if (this.genre() === 'No Seleccionado') {
+          for (const book of this.booksList()) {
+            if (!book.isAdded) {
+              this._libraryService.increaseAvailableBooksForGenreCounter();
+            }
+          }
+        } else {
+          for (const book of this.booksList()) {
+            if (book.genre === this.genre() && !book.isAdded) {
+              this._libraryService.increaseAvailableBooksForGenreCounter();
+            }
+          }
+        }
+      },
+      { allowSignalWrites: true }
+    );
+  }
 
   ngOnInit(): void {
     console.log(this._libraryService.booksList());
   }
 
-  genre: string = 'No Seleccionado';
-  onGenreChange() {
-    
+  booksList = computed(() => this._libraryService.booksList());
 
-    this._libraryService.restartAvailableBooksForGenreCounter();
+  genre = computed(() => this._libraryService.genre());
 
-    if (this.genre === 'No Seleccionado') {
-      for (const book of this.booksList()) {
-        if (!book.isAdded) {
-          this._libraryService.increaseAvailableBooksForGenreCounter();
-        }
-      }
-    } else {
-      for (const book of this.booksList()) {
-        if (book.genre === this.genre && !book.isAdded) {
-          this._libraryService.increaseAvailableBooksForGenreCounter();
-        }
-      }
-    }
+  onGenreChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    console.log(event);
+    this._libraryService.setGenre(selectElement.value);
   }
-
-  changeEffect: any;
 
   availableBooksCounter = computed(() =>
     this._libraryService.availableBooksCounter()

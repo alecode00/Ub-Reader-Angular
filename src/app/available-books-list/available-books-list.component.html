@@ -15,7 +15,7 @@
       </p>
       <div class="headerContainerItems" id="inputGenre">
         <label for="genre">Género: </label>
-        <select id="genre" [(ngModel)]="genre" (ngModelChange)="onGenreChange()">
+        <select id="genre" (change)="onGenreChange($event)">
           <option value="No Seleccionado">No Seleccionado</option>
           <option value="Base de Datos">Base de Datos</option>
           <option value="Node Js">Node Js</option>
@@ -28,7 +28,7 @@
     <ul id="enableBooksList">
       <!-- {/* Renderizado de los libros según el género seleccionado. */} -->
       @for (book of booksList(); track book.isbn13) {
-        @if (genre=='No Seleccionado') {
+        @if (genre()=='No Seleccionado') {
           <li class="availableListElement">
             <img
               [ngClass]="
@@ -41,7 +41,7 @@
               (click)="handleBookClick(book.isbn13)"
             />
           </li>
-        }@else if (book.genre == genre) {
+        }@else if (book.genre == genre()) {
             <li class="availableListElement">
               <img
                 [ngClass]="

@@ -42,6 +42,8 @@ export class LibraryService {
   public setBooks(newBooks: Book[]) {
     this.booksList.set(newBooks);
   }
+
+
   availableBooksCounter = signal<number>(0);
   increaseAvailableBooksCounter() {
     this.availableBooksCounter.update((value) => value + 1);
@@ -49,7 +51,7 @@ export class LibraryService {
   decreaseAvailableBooksCounter() {
     this.availableBooksCounter.update((value) => value - 1);
   }
- 
+
 
   readingListCounter = signal<number>(0);
   increaseReadingListCounter() {
@@ -58,6 +60,7 @@ export class LibraryService {
   decreaseReadingListCounter() {
     this.readingListCounter.update((value) => value - 1);
   }
+
 
   availableBooksForGenreCounter = signal<number>(0);
   increaseAvailableBooksForGenreCounter() {
@@ -68,5 +71,11 @@ export class LibraryService {
   }
   restartAvailableBooksForGenreCounter() {
     this.availableBooksForGenreCounter.set(0);
+  }
+
+  
+  genre = signal<string>('No Seleccionado');
+  public setGenre(newGenre: string) {
+    this.genre.set(newGenre);
   }
 }
