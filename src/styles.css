@@ -12,10 +12,13 @@ img {
   transform: scale(1);
   filter: brightness(1.2);
   transition: transform 0.3s;
+  transition: filter 0.3s;
+  filter: drop-shadow(15px 15px 5px rgba(0, 0, 0, 0.5));
+
 }
 img:hover {
   transform: scale(1.1);
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.8);
+  filter: drop-shadow(15px 15px 5px rgba(0, 0, 0, 0.8));
 }
 main {
   display: flex;
@@ -30,4 +33,3 @@ main {
     flex-direction: column;
   }
 }
-
